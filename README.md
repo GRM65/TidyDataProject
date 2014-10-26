@@ -4,11 +4,11 @@ This project processes data related to a study concerning the use of "wearable c
 
 Execution:
 
-This project consists of a single R script, "run_analysis.R". This script can be sourced into the R app and executed without additional input from the user.
+This project consists of a single R script, 'run_analysis.R'. This script can be sourced into the R app and executed without additional input from the user.
 
 Libraries:
 
-The script attempts to load the 'plyr' library. Therefore, the 'plyr' package should be installed in the local version of R prior to using this script. Note that loading 'plyr' after 'dplyr' is already loaded will generate a warning. Should this occur, remove the 'dplyr' library from the current R environment and then load 'plyr' first before reloading 'dplyr' if needed.
+The script attempts to load the 'plyr' library. Therefore, the 'plyr' package should be installed in the local version of R prior to using this script. Note that attempting to load 'plyr' after 'dplyr' is already loaded will generate a warning. Should this occur, remove the 'dplyr' library from the current R environment and then load 'plyr' first before reloading 'dplyr' if needed.
 
 Data Source:
 
@@ -19,71 +19,71 @@ Input Files:
 The "UCI HAR Dataset" folder should contain the following files and folders:
 
 	train -- sub-folder containing the following files:
-			X_train.txt
-			y_train.txt
-			subject_train.txt
+		X_train.txt
+		y_train.txt
+		subject_train.txt
 			
 	test -- subfolder containing the following files:
-			X_test.txt
-			y_test.txt
-			subject_test.txt
+		X_test.txt
+		y_test.txt
+		subject_test.txt
 			
 	activity_labels.txt
 
 	features.txt
-	
-Other files in the "UCI HAR Dataset" folder, including the contents of the "Inertial Signals" subfolders in both /train and /test folders, are not used in this project.
+
+Other files in the "UCI HAR Dataset" folder, including the contents of the "Inertial Signals" subfolders in the /train and /test folders, are not used in this project.
 
 Methodology:
 
 The script performs the following tasks:
 
-	1. Reads each of the above-mentioned text files into individual data frames:
+1. Reads each of the above-mentioned text files into individual data frames:
 	
 			Filename			––>			Data Frame
-			X_train.txt 						x_train
-			y_train.txt							y_train
+			X_train.txt 			x_train
+			y_train.txt				y_train
 			subject_train.txt				subject_train
-			X_test.txt							x_test
-			y_test.txt							y_test
+			X_test.txt				x_test
+			y_test.txt				y_test
 			subject_text.txt				subject_text	
-			activity_labels.txt			activity_labels
-			featurex.txt						features
+			activity_labels.txt				activity_labels
+			featurex.txt				features
 	
-	2. Adds descriptive names "activity_id" and "activity_name" to the columns in the "activity_labels" data frame.
+2. Adds descriptive names "activity_id" and "activity_name" to the columns in the "activity_labels" data frame.
 	
-	3. Extracts the second column of the "features" data frame as a vector to use for labelling the measured data columns (See step 5 below.)
+3. Extracts the second column of the "features" data frame as a vector to use for labelling the measured data columns (See step 5 below.)
 	
-	4. Combines corresponding "test" and "train" data frames into "combined" data frames using rbind( ):
+4. Combines corresponding "test" and "train" data frames into "combined" data frames using rbind( ):
 	
 			Individual data frames				Combined data frame
-			x_test, x_train								x_combined
-			y_test, y_train								y_combined
-			subject_test, subject_train		subject_combined
+			x_test, x_train				x_combined
+			y_test, y_train				y_combined
+			subject_test, subject_train				subject_combined
 			
-			Note: Because these pieces will be joined together in subsequent steps to form one single data frame, the order of the "test" and "train" data frames must be consistent for all three rbind( ) operations.
+	Note: Because these pieces will be joined together in subsequent steps to form one single data frame, the order of the "test" and "train" data frames must be consistent for all three rbind( ) operations.
 			
-	5. Adds descriptive column names to the "x_combined" data frame, using the vector of labels from step 3 above.
+5. Adds descriptive column names to the "x_combined" data frame, using the vector of labels from step 3 above.
 	
-	6. Adds column name to the "y_combined" data frame
+6. Adds column name to the "y_combined" data frame
 	
-	7. Adds column name to the "subject_combined" data frame
+7. Adds column name to the "subject_combined" data frame
 	
-	8. Combines "subject_combined" and "y_ combined" data frames, forming "subject_y_combined" data frame
+8. Combines "subject_combined" and "y_combined" data frames, forming "subject_y_combined" data frame
 	
-	9. Use the join( ) operation from the "plyr" library to add the activity names to the "subject_y_combined" data frame, using the "activity_labels" data frame as a lookup table. A new data frame, "subject_y_activity_combined", is created.
+9. Use the join() operation from the 'plyr' library to add the activity names to the "subject_y_combined" data frame, using the "activity_labels" data frame as a lookup table. A new data frame, "subject_y_activity_combined", is created.
 
-	10. Combine the "subject_y_activity_combined" and "x_combined" data frames using cbind( ). This creates the "data" data frame, which contains all of the data from the various text files combined into a single data frame.
+10. Combine the "subject_y_activity_combined" and "x_combined" data frames using cbind( ). This creates the "data" data frame, which contains all of the data from the various text files combined into a single data frame.
 
-	11. Reorder the combined data by "subject_id" and "activity_id"	. While not strictly necessary, this step makes it easier to scan the resulting data frame to ensure the all 30 subjects have been included as intended.
+11. Reorder the combined data by "subject_id" and "activity_id"	. While not strictly necessary, this step makes it easier to scan the resulting data frame to ensure the all 30 subjects have been included as intended.
 	
-	12. Use the grepl( ) function to create a logical vector identifying columns to extract from the combined data frame. Of interest are the "subject_id" and "activity_name" fields, and any measured variable that includes "mean" or "std" in the name, excluding those with "meanFreq". The latter are excluded because they do not appear to represent a mean of a measured value for the purposes of this project. See the file "features_info.txt" in the original "UCI HAR Dataset" folder for additional information about the variables used in the original data set.
+12. Use the grepl() function to create a logical vector identifying columns to extract from the combined data frame. Of interest are the "subject_id" and "activity_name" fields, and any measured variable that includes "mean" or "std" in the name, excluding those with "meanFreq". The latter are excluded because they do not appear to represent a mean of a measured value for the purposes of this project. See the file "features_info.txt" in the original "UCI HAR Dataset" folder for additional information about the variables used in the original data set.
 
-	13. Subset the "data" data frame by extracting only those columns that were identified in the preceding step. The results are sent back to "data", thereby replacing the previous combined version of "data".
+13. Subset the "data" data frame by extracting only those columns that were identified in the preceding step. The results are sent back to "data", thereby replacing the previous combined version of "data".
 
-	14. Use the ddply( ) function from the "plyr" library to collapse the data into unique combinations of "subject_id" and "activity_name", and compute the mean value for each of the 66 variables for each combination. The result are kept in a new data frame, "finaldata".
+14. Use the ddply() function from the "plyr" library to collapse the data into unique combinations of "subject_id" and "activity_name", and compute the mean value for each of the 66 variables for each combination. The result are kept in a new data frame, "finaldata".
 	
-	15. Write the "finaldata" data frame out to a text file in the current working directory named "tidydata.txt". Note that any existing file in the current working directory having the same name will be overwritten. Future versions of this script could include testing to check for the existence of a file with that name prior to writing, and providing appropriate messaging in cases where a file might be overwritten. 
+15. Write the "finaldata" data frame out to a text file in the current working directory named "tidydata.txt". Note that any existing file in the current working directory having the same name will be overwritten. Future versions of this script could include testing to check for the existence of a file with that name prior to writing, and providing appropriate messaging in cases where a file might be overwritten. 
 	
 Output:
 
