@@ -85,13 +85,15 @@ The script performs the following tasks:
 
 14. Use the `ddply( )` function from the `plyr` library to collapse the data into unique combinations of `subject_id` and `activity_name`, and compute the mean value for each of the 66 variables for each combination. The result are kept in a new data frame, `finaldata`.
 
-15. Write the `finaldata` data frame out to a text file in the current working directory named `tidydata.txt`. Note that any existing file in the current working directory having the same name will be overwritten. Future versions of this script could include testing to check for the existence of a file with that name prior to writing, and providing appropriate messaging in cases where a file might be overwritten. 
+15. Rename the columns in the `final data` data frame by prepending "meanOf_" to the beginning of each column name, except for the `subject_id` and `activity_name` columns.
+
+16. Write the `finaldata` data frame out to a text file in the current working directory named `tidydata.txt`. Note that any existing file in the current working directory having the same name will be overwritten. Future versions of this script could include testing to check for the existence of a file with that name prior to writing, and providing appropriate messaging in cases where a file might be overwritten. 
 	
 ###Output###
 
 The script writes out the final result to a text file named `tidydata.txt`, which is written to the current working directory. This file can be read back into R with the following instruction:
 
-data_frame_name <- read.table("tidydata.txt", header = FALSE)
+data_frame_name <- read.table("tidydata.txt", header = TRUE)
 
 ###Notes###
 

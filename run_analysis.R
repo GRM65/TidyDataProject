@@ -60,5 +60,12 @@ data <- data[ , cols_to_keep]
 # subject_id and activity_name
 finaldata <- ddply(data, .(subject_id, activity_name), numcolwise(mean))
 
+# Modify column names in 'finaldata' data frame to reflect the change in values to means
+# of the variables
+finaldata_names <- names(finaldata)
+finaldata_names <- sub("^t", "meanOf_t", finaldata_names)
+finaldata_names <- sub("^f", "meanOf_f", finaldata_names)
+colnames(finaldata) <- c(finaldata_names)
+
 # Write finaldata data frame to file
 write.table(finaldata, "tidydata.txt", row.names = FALSE)
