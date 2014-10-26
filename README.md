@@ -41,11 +41,11 @@ The script performs the following tasks:
 1. Reads each of the above-mentioned text files into individual data frames:
 	
 			Filename			––>			Data Frame
-			X_train.txt 			x_train
-			y_train.txt				y_train
+			X_train.txt 					x_train
+			y_train.txt						y_train
 			subject_train.txt				subject_train
-			X_test.txt				x_test
-			y_test.txt				y_test
+			X_test.txt						x_test
+			y_test.txt						y_test
 			subject_text.txt				subject_text	
 			activity_labels.txt				activity_labels
 			featurex.txt				features
