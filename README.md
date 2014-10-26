@@ -50,16 +50,17 @@ The script performs the following tasks:
 			activity_labels.txt				activity_labels
 			featurex.txt				features
 			
-			|Filename|––>|Data Frame|
+
+|Filename|––>|Data Frame|
 |:---------|:----------:|:----------|
-|X_train.txt||x_train|
-|y_train.txt||y_train|
-|subject_train.txt||subject_train|
-|X_test.txt||x_test|
-|y_test.txt||y_test|
-|subject_test.txt||subject_test|
-|activity_labels.txt||activity_labels|
-|features.txt||features|
+|X_train.txt|'                 '|x_train|
+|y_train.txt|'                 '|y_train|
+|subject_train.txt|'                 '|subject_train|
+|X_test.txt|'                 '|x_test|
+|y_test.txt|'                 '|y_test|
+|subject_test.txt|'                 '|subject_test|
+|activity_labels.txt|'                 '|activity_labels|
+|features.txt|'                 '|features|
 	
 2. Adds descriptive names "activity_id" and "activity_name" to the columns in the "activity_labels" data frame.
 	
