@@ -2,19 +2,19 @@ README.md
 
 This project processes data related to a study concerning the use of "wearable computing" devices. Specifically, the data used in this project was collected from accelerometers built into the Samsung Galaxy S smartphone. (See http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones for more information concerning this study.)
 
-Execution:
+***Execution:***
 
 This project consists of a single R script, `run_analysis.R`. This script can be sourced into the R app and executed without additional input from the user.
 
-Libraries:
+***Libraries:***
 
 The script attempts to load the `plyr` library. Therefore, the `plyr` package should be installed in the local version of R prior to using this script. Note that attempting to load `plyr` after `dplyr` is already loaded will generate a warning. Should this occur, remove the `dplyr` library from the current R environment and then load `plyr` first before reloading `dplyr` if needed.
 
-Data Source:
+***Data Source:***
 
 The data used for this project can be downloaded from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip. This zipped archive file must then be unzipped to obtain the "UCI HAR Dataset" folder. This folder and its contents should be placed in the current R working directory. Alternatively, the user may set the current working directory in R to be the "UCI HAR Dataset" folder.
 
-Input Files:
+***Input Files:***
 
 The "UCI HAR Dataset" folder should contain the following files and folders:
 
@@ -34,7 +34,7 @@ The "UCI HAR Dataset" folder should contain the following files and folders:
 
 Other files in the "UCI HAR Dataset" folder, including the contents of the "Inertial Signals" subfolders in the /train and /test sub-folders, are not used in this project.
 
-Methodology:
+***Methodology:***
 
 The script performs the following tasks:
 
@@ -87,13 +87,13 @@ The script performs the following tasks:
 
 15. Write the `finaldata` data frame out to a text file in the current working directory named `tidydata.txt`. Note that any existing file in the current working directory having the same name will be overwritten. Future versions of this script could include testing to check for the existence of a file with that name prior to writing, and providing appropriate messaging in cases where a file might be overwritten. 
 	
-Output:
+***Output:***
 
 The script writes out the final result to a text file named `tidydata.txt`, which is written to the current working directory. This file can be read back into R with the following instruction:
 
 data_frame_name <- read.table("tidydata.txt", header = FALSE)
 
-Notes:
+***Notes:***
 
 The data set produced by this script is a relatively "wide" data set, consisting of 180 rows (one for each combination of `subject_id` and `activity_label`), with each row containing the corresponding mean values for 66 different measured variables. Additional processing could render this data into a "tall" data set by converting the 66 variable names into a "feature" variable and using the existing column names as factor levels for the new variable. By "melting" and "casting" this data frame, a new data frame could be created that included columns for only `subject_id`, `activity_name`, `feature`, `mean`, and `std`. The resulting data frame would then be only 5 columns wide. However, instead of the current 180 rows, the new data frame would consist of 180 * 33 = 5940 rows. (The value 33 comes from the fact that each of the 66 variables is part of mean/std pair. Each pair of values would be on its own line in the reshaped data, so there would be 33 lines for each combination of `subject_id` and `activity_name`.)
 
