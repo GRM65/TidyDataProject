@@ -40,17 +40,16 @@ The script performs the following tasks:
 
 1. Reads each of the above-mentioned text files into individual data frames:
 	
-
-|Filename|––>|Data Frame|
-|:---------|:----------:|:----------|
-|X_train.txt|                 |x_train|
-|y_train.txt|                 |y_train|
-|subject_train.txt|                 |subject_train|
-|X_test.txt|                 |x_test|
-|y_test.txt|                 |y_test|
-|subject_test.txt|                 |subject_test|
+|Filename              |––>|Data Frame|
+|:-----------------------|:----------:|:----------|
+|X_train.txt            |                 |x_train|
+|y_train.txt             |                 |y_train|
+|subject_train.txt  |                 |subject_train|
+|X_test.txt              |                 |x_test|
+|y_test.txt               |                 |y_test|
+|subject_test.txt    |                 |subject_test|
 |activity_labels.txt|                 |activity_labels|
-|features.txt|                 |features|
+|features.txt            |                 |features|
 	
 2. Adds descriptive names "activity_id" and "activity_name" to the columns in the "activity_labels" data frame.
 	
