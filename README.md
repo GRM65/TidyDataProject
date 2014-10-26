@@ -57,11 +57,11 @@ The script performs the following tasks:
 	
 4. Combines corresponding "test" and "train" data frames into "combined" data frames using rbind( ):
 	
-	|Individual data frames| |Combined data frame|
-	|:-----------------------|:----------:|:-------------------|	
-	|x_test, x_train|				|x_combined|
-	|y_test, y_train|				|y_combined|
-	|subject_test, subject_train|				|subject_combined|
+	|Individual data frames       | ––>        |Combined data frame|
+	|:-----------------------------------|:----------:|:-----------------------------|	
+	|x_test, x_train                      |				  |x_combined                  |
+	|y_test, y_train                      |				  |y_combined                  |
+	|subject_test, subject_train|				  |subject_combined       |
 			
 	Note: Because these pieces will be joined together in subsequent steps to form one single data frame, the order of the "test" and "train" data frames must be consistent for all three rbind( ) operations.
 			
